@@ -8,8 +8,8 @@ variables_a = [
     ("A2", "integer")
 ]
 functions_a = [
-    ("lol_a1(o: str, m: int, g: bool)", "int"),
-    ("lol_a2(l: str, o: int, l: bool)", "bool")
+    ("+", "lol_a1(o: str, m: int, g: bool)", "int"),
+    ("#", "lol_a2(l: str, o: int, l: bool)", "bool")
 ]
 
 inheritance_a = ["Father_A", "Mother_A"]

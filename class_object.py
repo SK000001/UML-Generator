@@ -50,5 +50,5 @@ class ClassRelationships:
 class ClassObject:
     class_name: str
     class_variables: list[tuple[str, str]] = field(default_factory=list)     # [ ( variable name , data type ) ]
-    class_functions: list[tuple[str, str]] = field(default_factory=list)     # [ ( function(param) , return_type ) ]
+    class_functions: list[tuple[str, str, str]] = field(default_factory=list)     # [ ( modifier, function(param) , return_type ) ]
     class_relationships: ClassRelationships = field(default_factory=ClassRelationships)

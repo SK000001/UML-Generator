@@ -11,8 +11,8 @@ def generate_uml(class_obj: ClassObject):
         label += f'+ {var_name} : {var_type}<BR ALIGN="LEFT"/>\n'
     
     label += f"""</TD></TR><TR><TD ALIGN="LEFT">"""
-    for func_name, return_type in class_obj.class_functions:
-        label += f'+ {func_name} : {return_type}<BR ALIGN="LEFT"/>\n'
+    for mod, func_name, return_type in class_obj.class_functions:
+        label += f'{mod} {func_name} : {return_type}<BR ALIGN="LEFT"/>\n'
     
     label += "</TD></TR></TABLE>>" 
     
