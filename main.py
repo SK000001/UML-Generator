@@ -15,18 +15,20 @@ functions_a = [
 ]
 
 # relationships
-inheritance_a = [Relation(source_class="Father_A", target_class=name_a, relation_type=RelationType.INHERITANCE),
-                 Relation(source_class="Mother_A", target_class=name_a, relation_type=RelationType.INHERITANCE)]
+inheritance_a = [Relation(source_class=name_a, target_class=target, relation_type=RelationType.INHERITANCE)
+                 for target in ["Father_A", "Mother_A"]]
 
 associations_a = [Relation(source_class=name_a, target_class=target, relation_type=RelationType.ASSOCIATION)
                   for target in ["C", "D"]]
 
-compositions_a = [Relation(source_class=name_a, target_class="E", relation_type=RelationType.COMPOSITION)]
+compositions_a = [Relation(source_class=name_a, target_class=target, relation_type=RelationType.COMPOSITION)
+                  for target in ["E"]]
 
 aggregations_a = [Relation(source_class=name_a, target_class=target, relation_type=RelationType.AGGREGATION)
                   for target in ["F", "G"]]
 
-dependencies_a = [Relation(source_class=name_a, target_class="H", relation_type=RelationType.DEPENDENCY)]
+dependencies_a = [Relation(source_class=name_a, target_class=target, relation_type=RelationType.DEPENDENCY)
+                  for target in ["H"]]
 
 # all relations combined
 all_relations = inheritance_a + associations_a + compositions_a + aggregations_a + dependencies_a
@@ -41,5 +43,5 @@ my_class_object = ClassObject(
 
 uml = UmlGenerator(my_class_object)
 uml.add_class_box()
-uml.generate_all_relationships()
+uml.generate_inheritances()
 uml.render_graph()
