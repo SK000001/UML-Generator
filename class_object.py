@@ -1,5 +1,3 @@
-from dataclasses import dataclass, field
-
 # Small table for relationships
 '''
 | Relationship | Symbol | Description                        | Lifespan      |
@@ -38,17 +36,33 @@ class Boat:
         self.engine = engine  # aggregation
 '''
 
+from dataclasses import dataclass, field
+from enum import Enum
+
+class RelationType(Enum):
+    INHERITANCE = ("onormal", "solid")
+    ASSOCIATION = ("vee", "solid")
+    COMPOSITION = ("diamond", "solid")
+    AGGREGATION = ("odiamond", "solid")
+    DEPENDENCY = ("vee", "dashed")
+
 @dataclass
-class ClassRelationships:
-    inheritances: list[str] = field(default_factory=list)
-    associations: list[str] = field(default_factory=list)     # get passed another object or refer to it
-    compositions: list[str] = field(default_factory=list)     # one class created and manage the other
-    aggregations: list[str] = field(default_factory=list)
-    dependencies: list[str] = field(default_factory=list)     # used an object just inside a method
+class Relation:
+    source_class: str
+    target_class: str
+    relation_type: RelationType
+
+    def get_arrow_style(self):
+        return self.relation_type.value
+
+class AccessModifier(Enum):
+    PUBLIC = "+"
+    PRIVATE = "-"
+    PROTECTED = "#"
 
 @dataclass
 class ClassObject:
     class_name: str
     class_variables: list[tuple[str, str]] = field(default_factory=list)     # [ ( variable name , data type ) ]
-    class_functions: list[tuple[str, str, str]] = field(default_factory=list)     # [ ( modifier, function(param) , return_type ) ]
-    class_relationships: ClassRelationships = field(default_factory=ClassRelationships)
+    class_functions: list[tuple[AccessModifier, str, str]] = field(default_factory=list)     # [ ( modifier, function(param) , return_type ) ]
+    class_relationships: list[Relation] = field(default_factory=list)
